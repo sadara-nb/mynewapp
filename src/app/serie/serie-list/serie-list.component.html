@@ -1,3 +1,63 @@
-<p>
-  serie-list works!
-</p>
+<style>
+  .serie-name-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .serie-name-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+
+<div class="header-bar d-flex align-items-center p-2 bg-primary-subtle border-bottom border-primary shadow-sm">
+  <img src="https://img.freepik.com/vector-premium/televisor-dibujos-animados-fondo-azul-fondo-rojo_1120554-24331.jpg"
+       alt="TV Logo"
+       width="50"
+       class="me-2 rounded" />
+  <h4 class="mb-0">TV Series</h4>
+</div>
+
+<div class="container mt-4">
+  <div class="row g-3">
+
+    <div class="col-md-8">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-primary">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Channel</th>
+              <th>Seasons</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let serie of series; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <span class="serie-name-link" (click)="onSelected(serie)">
+                  {{ serie.name }}
+                </span>
+              </td>
+              <td>{{ serie.channel }}</td>
+              <td>{{ serie.seasons }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-end mt-3">
+        <span class="fw-bold">Promedio de temporadas: {{ averageSeasons | number:'1.0-2' }}</span>
+      </div>
+    </div>
+
+    <div class="col-md-4" *ngIf="selectedSerie">
+      <app-serie-detail [serieDetail]="selectedSerie"></app-serie-detail>
+    </div>
+
+  </div>
+</div>
